@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="dark"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Manifesto — Cadence Cazimi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; background: #1E1008; }
+body {
+  background: #1E1008;
+  color: #EDE0CC;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  line-height: 1.9;
+  font-size: 18px;
+  overflow-x: hidden;
+  cursor: default;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+}
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 1.8rem 3rem;
+  z-index: 100;
+  background: rgba(30,16,8,0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(196,128,74,0.15);
+}
+.nav-left, .nav-right {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #C8BAA8;
+}
+.nav-right { text-align: right; }
+.nav-center {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: #C4804A;
+  text-align: center;
+}
+.opening {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 8rem 12vw 6rem;
+  position: relative;
+  border-bottom: 1px solid rgba(196,128,74,0.2);
+}
+.opening::before {
+  content: 'C';
+  position: absolute;
+  right: -2vw;
+  bottom: -8vh;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28rem, 45vw, 55rem);
+  font-weight: 300;
+  color: #C4804A;
+  opacity: 0.05;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.opening-label {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #C8BAA8;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: rise 1s ease 0.3s forwards;
+}
+.opening-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.6rem, 6.5vw, 6rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  max-width: 820px;
+  color: #EDE0CC;
+  opacity: 0;
+  animation: rise 1.2s ease 0.5s forwards;
+}
+.opening-title em { font-style: italic; color: #C4804A; }
+.opening-sub {
+  margin-top: 3rem;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.82rem, 1.3vw, 0.94rem);
+  letter-spacing: 0.06em;
+  color: #C8BAA8;
+  max-width: 420px;
+  line-height: 1.8;
+  opacity: 0;
+  animation: rise 1.2s ease 0.8s forwards;
+}
+.scroll-cue {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 12vw;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #C8BAA8;
+  opacity: 0;
+  animation: rise 1s ease 1.4s forwards;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.scroll-cue::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: #C8BAA8;
+  animation: expand 1.5s ease 2s forwards;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+@keyframes expand { to { transform: scaleX(1); } }
+article { max-width: 660px; margin: 0 auto; padding: 7rem 6vw; }
+.chapter {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.2rem;
+  margin-top: 6rem;
+}
+.chapter:first-child { margin-top: 0; }
+.chapter-num {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #C4804A;
+  white-space: nowrap;
+}
+.chapter-line { flex: 1; height: 1px; background: rgba(196,128,74,0.2); }
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  color: #EDE0CC;
+}
+p { margin-bottom: 1.5rem; font-size: 1.05rem; color: #D8CABC; font-weight: 300; }
+.pull {
+  margin: 3.5rem -3rem;
+  padding: 2.5rem 3rem;
+  border-top: 1px solid rgba(196,128,74,0.2);
+  border-bottom: 1px solid rgba(196,128,74,0.2);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.8vw, 1.7rem);
+  font-weight: 300;
+  line-height: 1.5;
+  color: #C4804A;
+  text-align: center;
+}
+.triptych {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(196,128,74,0.2);
+  border: 1px solid rgba(196,128,74,0.2);
+  margin: 3.5rem 0;
+}
+.triptych-panel {
+  background: #231309;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: background 0.4s;
+}
+.triptych-panel:hover { background: rgba(196,128,74,0.07); }
+.triptych-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  color: #C4804A;
+}
+.triptych-role {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #C8BAA8;
+  margin-bottom: 1rem;
+}
+.triptych-desc {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: #C8BAA8;
+  line-height: 1.75;
+}
+.axioms {
+  margin: 3rem 0;
+  list-style: none;
+  border-left: 1px solid rgba(196,128,74,0.2);
+  padding-left: 2rem;
+}
+.axioms li {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #D8CABC;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(196,128,74,0.12);
+  position: relative;
+}
+.axioms li::before {
+  content: attr(data-n);
+  position: absolute;
+  left: -2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: #C4804A;
+  top: 1.1rem;
+}
+.axioms li:last-child { border-bottom: none; }
+.closing {
+  border-top: 1px solid rgba(196,128,74,0.2);
+  padding-top: 5rem;
+  margin-top: 6rem;
+  text-align: center;
+}
+.closing-prelude {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #C8BAA8;
+  margin-bottom: 2.5rem;
+}
+.closing-statement {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.25;
+  color: #C4804A;
+  max-width: 580px;
+  margin: 0 auto 3rem;
+}
+.closing-body {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.88rem;
+  color: #C8BAA8;
+  line-height: 1.9;
+  max-width: 440px;
+  margin: 0 auto 3rem;
+  letter-spacing: 0.02em;
+}
+.closing-sig {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #C4804A;
+  letter-spacing: 0.03em;
+}
+footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 2.5rem 3rem;
+  border-top: 1px solid rgba(196,128,74,0.2);
+  margin-top: 5rem;
+}
+.footer-left, .footer-right {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #C8BAA8;
+}
+.footer-right { text-align: right; }
+.footer-center { font-family: 'Cormorant Garamond', serif; font-size: 0.75rem; color: #C8BAA8; text-align: center; }
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 640px) {
+  .triptych { grid-template-columns: 1fr; }
+  .pull { margin: 3rem 0; }
+  nav { padding: 1.5rem 1.5rem; }
+  .opening { padding: 7rem 6vw 5rem; }
+  article { padding: 5rem 6vw; }
+  footer { grid-template-columns: 1fr; gap: 0.5rem; text-align: center; }
+  .footer-right { text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-left">Lucid Lines &nbsp;/&nbsp; Arq</span>
+  <span class="nav-center">Cadence Cazimi</span>
+  <span class="nav-right">Manifesto</span>
+</nav>
+
+<section class="opening">
+  <p class="opening-label">A philosophy of human development</p>
+  <h1 class="opening-title">The self is not<br/>a fixed thing.<br/>It is <em>a system.</em><br/>And systems can<br/>be designed.</h1>
+  <p class="opening-sub">What follows is the architecture behind everything built under this name — and the argument for why this work exists at all.</p>
+  <span class="scroll-cue">Read</span>
+</section>
+
+<article>
+
+  <div class="chapter reveal">
+    <span class="chapter-num">I &nbsp;·&nbsp; The Premise</span>
+    <div class="chapter-line"></div>
+  </div>
+  <h2 class="reveal">Most systems treat identity and environment as separate. They are not.</h2>
+  <p class="reveal">You are not a self that happens to have a body, a mind, a history, and a home. You are the continuous, dynamic interplay of all of them — a living system in which every layer speaks to every other. What you think shapes what you feel. What you feel shapes how you inhabit your body. How you inhabit your body shapes the environments you build and the choices you make from within them. And those environments, in turn, shape who you become.</p>
+  <p class="reveal">This is not metaphor. It is architecture. And like any architecture, it can be approached unconsciously — lived in without ever being understood — or it can be approached with intention, with clarity, with the willingness to look at the whole.</p>
+  <p class="reveal">Everything built under this name begins from that premise. The work is not self-improvement in the conventional sense. It is not optimisation for performance. It is something older and less fashionable: the project of becoming, in the fullest sense, yourself.</p>
+
+  <div class="pull reveal">
+    "The question was never who you are after the transformation.<br/>It was always who you were before the mask."
+  </div>
+
+  <div class="chapter reveal">
+    <span class="chapter-num">II &nbsp;·&nbsp; The Moment</span>
+    <div class="chapter-line"></div>
+  </div>
+  <h2 class="reveal">We are living through the most significant identity disruption in recorded history.</h2>
+  <p class="reveal">Artificial intelligence has not created the human identity crisis. It has revealed the one that was already quietly underway — and made it undeniable. For centuries, perhaps millennia, humans have outsourced their interiority. To productivity systems. To social approval. To the continuous stimulation of the feed, the role, the résumé, the body as performance. The self has become a surface.</p>
+  <p class="reveal">When intelligence is no longer a human monopoly — when the capacities we used to define ourselves by can be replicated, exceeded, made frictionless — what remains? The forecasters worry about economic irrelevance. The deeper question is: what are you when the performance is no longer required?</p>
+  <p class="reveal">The mystics answered this question long before the machines arrived. Rumi wrote of the self separated from its source. Lao Tzu described the sage who acts from stillness rather than strategy. Jung named the process of integrating what is real beneath the persona. Every serious wisdom tradition on earth has been pointing, across wildly different vocabularies and epochs, at the same structural truth: the self built on comparison, performance, and exceptionalism was always on borrowed time.</p>
+  <p class="reveal">AI just called the loan in.</p>
+  <p class="reveal">The humans who flourish in what comes next will not be those who compete with artificial intelligence on its own terms. They will be those who have done what no machine can: gone inside, sat with what they found, and built a self that is genuinely, irreducibly theirs. Embodied. Integrated. Coherent. Alive.</p>
+  <p class="reveal">That human is who this work is for. And that human is who this work is designed to produce.</p>
+
+  <div class="chapter reveal">
+    <span class="chapter-num">III &nbsp;·&nbsp; The Architecture</span>
+    <div class="chapter-line"></div>
+  </div>
+  <h2 class="reveal">Two systems. One architecture. Built for the whole human.</h2>
+  <p class="reveal">The work lives across two distinct but inseparable bodies — one that maps the inner world, one that maps the outer. Neither is complete without the other. Together, they constitute a full account of what a human being actually is and what it takes to live with genuine coherence.</p>
+
+  <div class="triptych reveal">
+    <div class="triptych-panel">
+      <div class="triptych-brand"><a href="https://lucidlinesstudio.com" style="color:#C4804A;text-decoration:none;" target="_blank">Lucid Lines</a></div>
+      <div class="triptych-role">The inner cartography</div>
+      <div class="triptych-desc">Structured reflection, psychological depth, the inner system. Develops the capacity to see yourself clearly — your patterns, your shadow, your values, your becoming.</div>
+    </div>
+    <div class="triptych-panel">
+      <div class="triptych-brand"><a href="https://arqritual.com" style="color:#C4804A;text-decoration:none;" target="_blank">Arq</a></div>
+      <div class="triptych-role">The outer cartography</div>
+      <div class="triptych-desc">Biology, environment, physical systems. Develops the vessel — through what you measure, what you consume, how you inhabit the spaces and the body you move through the world in.</div>
+    </div>
+    <div class="triptych-panel">
+      <div class="triptych-brand">Cadence Cazimi</div>
+      <div class="triptych-role">The spine</div>
+      <div class="triptych-desc">The philosophical north star that holds both. The argument for why this work matters — civilisationally, personally, urgently — and the voice through which that argument is made.</div>
+    </div>
+  </div>
+
+  <p class="reveal">The name Cazimi is taken from medieval astrology: the term for a planet positioned at the exact heart of the sun, in a condition of maximum clarity, power, and integration. To be cazimi is not to be exposed or burned — it is to be so thoroughly aligned with one's source that the distinction between vessel and light ceases to matter.</p>
+  <p class="reveal">That is the condition this work moves toward. Not perfection. Not arrival at some fixed endpoint. A quality of inhabiting your own life — fully, consciously, from the inside — that no external circumstance can take from you, because it was never dependent on external circumstance to begin with.</p>
+
+  <div class="chapter reveal">
+    <span class="chapter-num">IV &nbsp;·&nbsp; The Axioms</span>
+    <div class="chapter-line"></div>
+  </div>
+  <h2 class="reveal">What this work is built on.</h2>
+
+  <ul class="axioms reveal">
+    <li data-n="01">The self is a system, not a stone. It has inputs, outputs, feedback loops, and a structure that can be understood, designed, and refined.</li>
+    <li data-n="02">Inner and outer are not separate domains. The quality of your interior life shapes your biology. Your biology shapes your perception. Your perception shapes your world. The system is whole.</li>
+    <li data-n="03">Self-knowledge is not a luxury. In an era of intelligent machines, it is the only irreducible human advantage — and the only foundation on which a life of genuine agency can be built.</li>
+    <li data-n="04">Coherence is the goal. Not happiness, not success, not productivity. Coherence: the state in which your values, your actions, your body, and your environment are in honest alignment.</li>
+    <li data-n="05">The work is never finished. Individuation — the movement toward wholeness — is a lifelong process, not a destination. The point is not to arrive. It is to be genuinely in motion.</li>
+    <li data-n="06">Form matters. A beautiful object, a considered environment, a well-designed tool — these are not superficial. They are signals to the self about what is worth attending to. Aesthetics is an ethical position.</li>
+    <li data-n="07">The body is not the background. It is the foreground. Everything you think and feel and decide passes through it. To neglect the body is to build on sand.</li>
+  </ul>
+
+  <div class="chapter reveal">
+    <span class="chapter-num">V &nbsp;·&nbsp; The Human</span>
+    <div class="chapter-line"></div>
+  </div>
+  <h2 class="reveal">Not a superhuman. Something older and stranger.</h2>
+  <p class="reveal">The end result of this work is not a more efficient person. It is not a better-optimised biological machine or a more psychologically sophisticated performer. It is something the wisdom traditions have always described and the modern world has consistently undervalued: a deeply, irreducibly human human.</p>
+  <p class="reveal">Someone who has stopped outsourcing their interiority. Who lives from the inside out. Who knows, with the kind of precision that can only come from genuine self-encounter, what they value, what they feel, what they need, and what they are here to do. Who inhabits their body as a home rather than a vehicle. Who has built their environment as a reflection of what is real in them, not as a performance of what is legible to others.</p>
+  <p class="reveal">This person is not an ideal type or a distant aspiration. They are the logical end point of taking seriously the question that every great tradition — philosophical, spiritual, psychological — has always insisted is the only question worth taking seriously:</p>
+
+  <div class="pull reveal">
+    Who are you, really?<br/>Not the role. Not the performance.<br/>Not the version of yourself built for other people's comfort.<br/><em>You.</em>
+  </div>
+
+  <p class="reveal">The post-AI world does not make this question optional. It makes it urgent. The humans who built their identity on capability, comparison, and external validation are facing that foundation being dismantled in real time. The humans who built it on genuine self-knowledge — on the kind of inner coherence that doesn't depend on being the smartest or the most productive in the room — are discovering that they were already prepared for this.</p>
+  <p class="reveal">This work exists to close that gap. To give the tools, the frameworks, the language, and the physical support for building a self that is resilient not because it is hard, but because it is real.</p>
+
+  <div class="closing reveal">
+    <p class="closing-prelude">The invitation</p>
+    <p class="closing-statement">"This is a version of myself I never knew could exist."</p>
+    <p class="closing-body">That sentence — that precise combination of recognition, surprise, and quiet excitement — is the experience this work is designed to produce. Not once, at the beginning. Repeatedly, across a lifetime, at every threshold where a truer version of yourself becomes available.</p>
+    <p class="closing-body">The self is not a fixed thing. It is a system. And you are its architect.</p>
+    <p class="closing-sig">— Cadence Cazimi</p>
+  </div>
+
+</article>
+
+<footer>
+  <span class="footer-left">Lucid Lines &nbsp;·&nbsp; Arq</span>
+  <span class="footer-center">cadencecazimi.com</span>
+  <span class="footer-right">Systems &nbsp;·&nbsp; Culture</span>
+</footer>
+
+<script>
+const els = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+els.forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
